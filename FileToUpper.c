@@ -7,47 +7,45 @@ int main()
     FILE *fp = NULL;
     FILE *fp1 = NULL;
     char ch = ' ';
-
-    //Open and check file exists
+    //Check and open file(s)
     fp = fopen(FILENAME, "r");
     if(fp == NULL)
     {
         printf("File does not exist!");
         return -1;
     }
-    fp1 = fopen("temp2.txt", "w");
-    if(fp1 == NULL);
+    fp1 = fopen("Temp.txt", "w");
+    if(fp1 == NULL)
     {
         printf("File does not exist!");
         return -1;
     }
-
-    //If Lower convert to Upper and copy
-    while ((ch =fgetc(fp)) != EOF)
-        if(islower(ch))
-        {
-            ch = ch-32;
-            putc(ch, "temp.txt");
-        }
-
-    fclose(FILENAME);
-    fclose("temp.txt");
-
+    //Loop change all lower-case to upper-case
+    while((ch=fgetc(fp)) != EOF)
+    {
+        ch = toupper(ch);
+        fputc(ch,fp1);
+    }
+    //Administrative tasks
+    fclose(fp);
+    fclose(fp1);
     remove(FILENAME);
     rename("temp.txt", FILENAME);
     remove("temp.txt");
-
+    //Check and open file
     fp = fopen(FILENAME, "r");
     if(fp == NULL)
     {
         printf("File does not exist!");
         return -1;
     }
-
-    while ((ch =fgetc(fp)) != EOF)
+    //Print output to screen
+    while((ch=fgetc(fp)) != EOF)
+    {
         printf("%c", ch);
-
-    fclose(FILENAME);
-
-    return 0;
+    }
+    //Administrative tasks
+    fclose(fp);
+    fp = NULL;
+    fp1 = NULL;
 }
