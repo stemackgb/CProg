@@ -1,2 +1,2 @@
 # C
-Complication of C programs written by myself.
+Compilation of C programs written by myself.
